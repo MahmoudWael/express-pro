@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api.js');
-//var serveIndex = require('serve-index');
+var serveIndex = require('serve-index');
 
 //var compression = require('compression');
 var logger = require('morgan');
@@ -48,10 +48,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
-// app.use('/public', serveIndex(
-//   path.join('public'),
-//   {icons: true}
-// ))
+app.use('/public', serveIndex(
+  path.join('public'),
+  {icons: true}
+))
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
